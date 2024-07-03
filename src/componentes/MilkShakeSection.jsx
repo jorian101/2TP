@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MilkShakeCard from './MilkShakeCard';
 import './MilkShakeSection.css';
 
 const MilkShakeSection = () => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
+
   const milkshakes = [
     {
       id: 1,
@@ -26,8 +32,8 @@ const MilkShakeSection = () => {
 
   return (
     <section className="milkshake-section">
-      <h2>Milk Shakes</h2>
-      {milkshakes.map((milkshake) => (
+      <h2 className={`title ${isVisible ? 'active' : ''}`} onClick={toggleVisibility}>Milk Shakes</h2>
+      {isVisible && milkshakes.map((milkshake) => (
         <MilkShakeCard key={milkshake.id} milkshake={milkshake} />
       ))}
     </section>
